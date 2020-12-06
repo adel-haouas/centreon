@@ -1,0 +1,20 @@
+yum install phpmyadmin -y
+
+## edit file /etc/httpd/conf.d/phpMyAdmin.conf and theses lines after Alias section at the begining of the file
+
+<LocationMatch ^/phpmyadmin/(?!api/latest/|api/beta/|api/v[0-9]+/|api/v[0-9]+\.[0-9]+/)(.*\.php(/.*)?)$>
+  ProxyPassMatch fcgi://127.0.0.1:9042/usr/share/phpMyAdmin/$1
+</LocationMatch>
+
+## and theses lines at the end of <Directory /usr/share/phpMyAdmin/>
+
+   <IfModule dir_module>
+     DirectoryIndex index.php 
+   </IfModule>
+
+##save the file
+
+echo "Include /etc/httpd/conf.d/phpMyAdmin.conf" >> /opt/rh/httpd24/root/etc/httpd/conf/httpd.conf
+
+# restart services
+systemctl restart rh-php72-php-fpm httpd24-httpd
