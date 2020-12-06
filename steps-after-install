@@ -1,0 +1,5 @@
+
+pvs
+pvmove -v /dev/sdb1
+pvs -o+pv_used
+pvremove  /dev/sdb1
