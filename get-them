@@ -1,0 +1,4 @@
+wget -nv -nc https://raw.githubusercontent.com/adel-haouas/centreon/master/centreon_generic_snmp.pl /usr/lib/centreon/plugins/centreon_generic_snmp.pl
+wget -nv -nc https://raw.githubusercontent.com/adel-haouas/centreon/master/centreon_haproxy_snmp.pl /usr/lib/centreon/plugins/centreon_haproxy_snmp.pl
+wget -nv -nc https://raw.githubusercontent.com/adel-haouas/centreon/master/centreon_openvpn_omi.pl /usr/lib/centreon/plugins/centreon_openvpn_omi.pl
+
