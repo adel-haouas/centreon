@@ -1,5 +1,5 @@
 
-#
+# to remove 2G disk from LVM
 pvs -o+pv_used
 pv2delete=$(pvs -o+pv_used|egrep 2.00g|awk '{print $1}')
 pvmove -v $pv2delete
@@ -16,8 +16,16 @@ su - centreon -c "/opt/rh/rh-php72/root/bin/php /usr/share/centreon/cron/centreo
 systemctl restart cbd centengine gorgoned
 mv  /etc/profile.d/centreon.sh /root/motd-centreon.sh
 
-#
+# to remove error with service disk-/
 rm -fv /var/lib/centreon/centplugins/cache_snmpstandard_127.0.0.1_161_storage
 /usr/lib/centreon/plugins/centreon_linux_snmp.pl --plugin=os::linux::snmp::plugin --mode=storage --hostname=127.0.0.1 --snmp-version='2c' --snmp-community='public'  --storage '/' --name --display-transform-src='' --display-transform-dst='' --warning-usage='80' --critical-usage='90' --filter-perfdata='storage.space|used|free'
 chown centreon-engine:centreon-engine  /var/lib/centreon/centplugins/cache_snmpstandard_127.0.0.1_161_storage
 
+# get-missing-plugins
+cd /usr/lib/centreon/plugins
+wget -nv -nc https://raw.githubusercontent.com/adel-haouas/centreon/master/centreon_generic_snmp.pl
+wget -nv -nc https://raw.githubusercontent.com/adel-haouas/centreon/master/centreon_haproxy_snmp.pl
+wget -nv -nc https://raw.githubusercontent.com/adel-haouas/centreon/master/centreon_openvpn_omi.pl 
+chmod 0775 centreon_generic_snmp.pl centreon_haproxy_snmp.pl centreon_openvpn_omi.pl 
+
+# 
