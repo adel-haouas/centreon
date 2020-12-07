@@ -1,8 +1,11 @@
 
-pvs
-pvmove -v /dev/sdb1
+#
 pvs -o+pv_used
-pvremove  /dev/sdb1
+pv2delete=$(pvs -o+pv_used|egrep 2.00g|awk '{print $1}')
+pvmove -v $pv2delete
+vgreduce centos_centreon-central $pv2delete
+pvremove -v $pv2delete
+pvs -o+pv_used
 
 #
 timedatectl set-timezone Africa/Tunis
@@ -11,5 +14,8 @@ systemctl restart rh-php72-php-fpm
 hostnamectl set-hostname centreon-central
 su - centreon -c "/opt/rh/rh-php72/root/bin/php /usr/share/centreon/cron/centreon-partitioning.php"
 systemctl restart cbd centengine gorgoned
+mv  /etc/profile.d/centreon.sh /root/motd-centreon.sh
+
 
 #
+
