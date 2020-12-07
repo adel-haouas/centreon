@@ -16,6 +16,8 @@ su - centreon -c "/opt/rh/rh-php72/root/bin/php /usr/share/centreon/cron/centreo
 systemctl restart cbd centengine gorgoned
 mv  /etc/profile.d/centreon.sh /root/motd-centreon.sh
 
-
 #
+rm -fv /var/lib/centreon/centplugins/cache_snmpstandard_127.0.0.1_161_storage
+/usr/lib/centreon/plugins/centreon_linux_snmp.pl --plugin=os::linux::snmp::plugin --mode=storage --hostname=127.0.0.1 --snmp-version='2c' --snmp-community='public'  --storage '/' --name --display-transform-src='' --display-transform-dst='' --warning-usage='80' --critical-usage='90' --filter-perfdata='storage.space|used|free'
+chown centreon-engine:centreon-engine  /var/lib/centreon/centplugins/cache_snmpstandard_127.0.0.1_161_storage
 
