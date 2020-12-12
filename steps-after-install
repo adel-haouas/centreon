@@ -26,6 +26,7 @@ cd /usr/lib/centreon/plugins
 wget -nv -nc https://raw.githubusercontent.com/adel-haouas/centreon/master/centreon_generic_snmp.pl
 wget -nv -nc https://raw.githubusercontent.com/adel-haouas/centreon/master/centreon_haproxy_snmp.pl
 wget -nv -nc https://raw.githubusercontent.com/adel-haouas/centreon/master/centreon_openvpn_omi.pl 
-chmod 0775 centreon_generic_snmp.pl centreon_haproxy_snmp.pl centreon_openvpn_omi.pl 
+wget -nv -nc https://raw.githubusercontent.com/adel-haouas/centreon/master/check_centreon_dummy.pl
+chmod 0775 centreon_generic_snmp.pl centreon_haproxy_snmp.pl centreon_openvpn_omi.pl check_centreon_dummy.pl
 
 # 
